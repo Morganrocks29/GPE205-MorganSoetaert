@@ -59,5 +59,11 @@ public abstract class Pawn : MonoBehaviour
 
     public abstract void Shoot();
 
+    /// <summary>
+    /// Rotate our pawn toward a given position
+    /// </summary>
+    /// <param name="targetPosition"></param>
+    public abstract void RotateTowards(Vector3 targetPosition);
+
     public abstract void Die();
 }

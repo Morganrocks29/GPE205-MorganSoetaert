@@ -159,8 +159,9 @@ GameObject:
   - component: {fileID: 1639899893}
   - component: {fileID: 1639899897}
   - component: {fileID: 3104473873111521104}
+  - component: {fileID: -3344840079080592560}
   m_Layer: 0
-  m_Name: UATank
+  m_Name: PlayerTank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -247,7 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  turnSpeed: 0.25
+  turnSpeed: 0.5
   maxHealth: 2
   shellPrefab: {fileID: 8274715871533174252, guid: 45c2896bd3f69804b9eb69c9d464af7d, type: 3}
   fireForce: 900
@@ -261,9 +262,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7181453275338633961}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.02
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -307,3 +308,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firepointTransform: {fileID: 7549695918002942001}
+--- !u!114 &-3344840079080592560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7181453275338633961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1631c816e1127fa4989ba7ad25592658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5

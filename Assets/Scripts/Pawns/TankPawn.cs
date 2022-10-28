@@ -34,6 +34,18 @@ public class TankPawn : Pawn
         mover.Rotate(-turnSpeed);
     }
 
+    public override void RotateTowards(Vector3 targetPosition)
+    {
+        // Find the vector to our target position 
+        Vector3 vectorToTarget = targetPosition - transform.position;
+
+        // Find the rotation to look down that vector
+        Quaternion targetRotation = Quaternion.LookRotation(vectorToTarget, Vector3.up);
+
+        // Rotate closer to that vector
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed = Time.deltaTime);
+    }
+
     // A function for taking damage
     public override void TakeDamage(float damage)
     {
@@ -49,7 +61,7 @@ public class TankPawn : Pawn
 
     public override void Shoot()
     {
-        shooter.Shoot(shellPrefab, fireForce, damageDone, shellLifespan);
+            shooter.Shoot(shellPrefab, fireForce, damageDone, shellLifespan);
     }
 
     // When an object calls this function, the object will be destroyed
