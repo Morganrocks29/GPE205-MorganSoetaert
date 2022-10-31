@@ -24,6 +24,7 @@ public abstract class Pawn : MonoBehaviour
     /// </summary>
     protected float _currentHealth;
 
+    protected NoiseMaker noiseMaker;
     /// <summary>
     /// The component that handles this pawn's movement
     /// </summary>

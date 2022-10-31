@@ -43,7 +43,7 @@ public class TankPawn : Pawn
         Quaternion targetRotation = Quaternion.LookRotation(vectorToTarget, Vector3.up);
 
         // Rotate closer to that vector
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed = Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
     }
 
     // A function for taking damage

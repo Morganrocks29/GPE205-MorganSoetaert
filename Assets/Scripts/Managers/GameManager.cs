@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour
     public Transform playerSpawnTransform;
     public List<PlayerController> players;
 
+    public CowardAIController AIControllerCoward;
+    public GuardAIController AIControllerGuard;
+    public ChaseAIController AIControllerChase;
+    public AttackAIController AIControllerAttack;
+
     private void Awake()
     {
         players = new List<PlayerController>();

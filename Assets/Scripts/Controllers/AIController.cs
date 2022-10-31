@@ -10,7 +10,7 @@ public class AIController : Controller
     /// </summary>
     public float lastStateChangeTime;
 
-    public enum AIState { Guard, Idle, Seek, Attack, Chase };
+    public enum AIState { Guard, Idle, Seek, Attack, Chase, Patrol, Flee };
 
     /// <summary>
     /// The state that our FSM is currently in 
@@ -45,7 +45,20 @@ public class AIController : Controller
     /// <summary>
     /// The waypoint we are currently at
     /// </summary>
-    private int currentWaypoint = 0;
+    public int currentWaypoint = 0;
+
+    // The area we can see in
+    public float fieldOfView;
+
+    // The maximum distance we can see the player
+    public float maxViewDistance;
+
+    // The distance the noise volume is
+    public float volumeDistance;
+
+    // The distance we can hear
+    public float hearingDistance;
+
     #endregion Variables
 
     #region MonoBehaviour
@@ -54,45 +67,15 @@ public class AIController : Controller
     {
         base.Start();
 
-        //ChangeState(AIState.Idle);
+        ChangeState(AIState.Idle);
     }
 
     // Update is called once per frame
     public override void Update()
     {
-        MakeDecisions();
-
         base.Update();
     }
     #endregion MonoBehaviour
-
-    public void MakeDecisions()
-    {
-        switch (currentState)
-        {
-            case AIState.Idle:
-                // Do the actions of the idle state
-                DoIdleState();
-                // Check for transitions 
-                if (IsDistanceLessThan(target, followDistance))
-                {
-                    ChangeState(AIState.Chase);
-                }
-                break;
-            case AIState.Chase:
-                // Do the actions of the chase state
-                DoChaseState();
-                // Check for transitions
-                /*if (!IsDistanceLessThan(target, followDistance))
-                {
-                    ChangeState(AIState.Idle);
-                }*/
-                break;
-            default:
-                Debug.LogError("The switch could not determine the current state.");
-                break;
-        }
-    }
 
     public virtual void ChangeState(AIState newState)
     {
@@ -106,26 +89,31 @@ public class AIController : Controller
     #region Actions
     public void Seek(GameObject target)
     {
-        pawn.RotateTowards(target.transform.position);
-
-        pawn.MoveForward();
-    }
-
-    public void Seek(Transform targetTransform)
-    {
-        Seek(targetTransform.gameObject);
+        // Find the target's transform
+        Seek(target.transform);
     }
 
     public void Seek(Pawn targetPawn)
     {
+        // Find the target
         Seek(targetPawn.gameObject);
+    }
+
+    public void Seek(Transform targetTransform)
+    {
+        // Find the target's transform position
+        Seek(targetTransform.position);
     }
 
     public void Seek(Vector3 targetPos)
     {
+        // Rotate towards the target's position 
         pawn.RotateTowards(targetPos);
+        // Move towards the target
         pawn.MoveForward();
     }
+
+
     protected void Flee()
     {
         //Find the vector to the target
@@ -141,22 +129,27 @@ public class AIController : Controller
         Vector3 fleeVector = vectorAwayFromTarget.normalized * flippedPercentOfFleeDistance;
         //Seek the point we want to move to flee from the target
         Seek(fleeVector);
-      
+
     }
 
     protected virtual void Patrol()
     {
+        // If the waypoints distance is more than the current waypoint
         if (waypoints.Length > currentWaypoint)
         {
+            // Find the next waypoint from the current waypoint
             Seek(waypoints[currentWaypoint]);
 
+            // If the distance of the pawn and the waypoint position's is less than the stop distance
             if (Vector3.Distance(pawn.transform.position, waypoints[currentWaypoint].position) < waypointStopDistance)
             {
+                // increment the current waypoint
                 currentWaypoint++;
             }
         }
         else
         {
+            // The current waypoint is zero
             RestartPatrol();
         }
     }
@@ -168,6 +161,10 @@ public class AIController : Controller
     #endregion Attacks
 
     #region Targeting
+
+    /// <summary>
+    /// If there is more than one player, target the first player
+    /// </summary>
     protected virtual void TargetPlayerOne()
     {
         if (GameManager.instance != null)
@@ -182,6 +179,9 @@ public class AIController : Controller
         }
     }
 
+    /// <summary>
+    /// Target the closest tank to the AI tank
+    /// </summary>
     protected virtual void TargetHarvestTank()
     {
         Pawn closestTank;
@@ -236,6 +236,13 @@ public class AIController : Controller
         pawn.Shoot();
         Debug.Log("Attack!");
     }
+
+    protected virtual void DoGuardState()
+    {
+        //Shoot
+        pawn.Shoot();
+        Debug.Log("Guard");
+    }
     #endregion States
 
     #region Conditions/Transitions
@@ -244,9 +251,15 @@ public class AIController : Controller
 
     }
 
+    /// <summary>
+    /// Check if the pawn and the target's postion and transform are less than the distance
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="distance"></param>
+    /// <returns></returns>
     protected bool IsDistanceLessThan(GameObject target, float distance)
     {
-        if (Vector3.Distance (pawn.transform.position, target.transform.position) < distance)
+        if (Vector3.Distance(pawn.transform.position, target.transform.position) < distance)
         {
             Debug.Log("Trigger");
             return true;
@@ -262,4 +275,59 @@ public class AIController : Controller
         return target != null;
     }
     #endregion Conditions/Transitions
+
+    #region Vision
+    public bool CanSee(GameObject target)
+    {
+
+        // Find the vector from the agent to the target
+        Vector3 agentToTargetVector = target.transform.position - transform.position;
+        // Find the angle between the direction our agent is facing (forward in local space) and the vector to the target.
+        float angleToTarget = Vector3.Angle(agentToTargetVector, pawn.transform.forward);
+        // if that angle is less than our field of view
+        if (angleToTarget < fieldOfView)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    #endregion Vision
+
+    #region Hearing 
+    public bool CanHear(GameObject target)
+    {
+        // Get the target's NoiseMaker
+        NoiseMaker noiseMaker = target.GetComponent<NoiseMaker>();
+        // If they don't have one, they can't make noise, so return false
+        if (noiseMaker == null)
+        {
+            return false;
+        }
+        // If they are making 0 noise, they also can't be heard
+        if (noiseMaker.volumeDistance <= 0)
+        {
+            return false;
+        }
+        // If they are making noise, add the volumeDistance in the noisemaker to the hearingDistance of this AI
+        float totalDistance = noiseMaker.volumeDistance + hearingDistance;
+        // If the distance between our pawn and target is closer than this...
+        if (Vector3.Distance(pawn.transform.position, target.transform.position) <= totalDistance)
+        {
+            // ... then we can hear the target
+            Debug.Log("Hear");
+            return true;
+        }
+        else
+        {
+            // Otherwise, we are too far away to hear them
+            Debug.Log("Too Far");
+            return false;
+        }
+    }
+    #endregion Hearing
 }
+
+
