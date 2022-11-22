@@ -10,7 +10,7 @@ public class AIController : Controller
     /// </summary>
     public float lastStateChangeTime;
 
-    public enum AIState { Guard, Idle, Seek, Attack, Chase, Patrol, Flee };
+    public enum AIState { Guard, Idle, Seek, Attack, Chase, Patrol, Flee, ChooseTarget };
 
     /// <summary>
     /// The state that our FSM is currently in 
@@ -167,16 +167,27 @@ public class AIController : Controller
     /// </summary>
     protected virtual void TargetPlayerOne()
     {
+        // If the game manager exists 
         if (GameManager.instance != null)
         {
+            // And the array of player exists
             if (GameManager.instance.players != null)
             {
+                // And there are players in it
                 if (GameManager.instance.players.Count > 0)
                 {
+                    // Then target the gameObject of the pawn of the first player controller in the list
                     target = GameManager.instance.players[0].pawn.gameObject;
                 }
+                Debug.Log("Target Acquired");
             }
         }
+    }
+
+    protected bool IsHasTarget()
+    {
+        // Return true if we have a target, false if we don't
+        return (target != null);
     }
 
     /// <summary>
@@ -216,6 +227,11 @@ public class AIController : Controller
     public void DoSeekState()
     {
         Seek(target);
+    }
+
+    public void DoChooseTargetState()
+    {
+        TargetPlayerOne();
     }
     protected void DoChaseState()
     {
@@ -270,10 +286,6 @@ public class AIController : Controller
         }
     }
 
-    protected bool IsHasTarget()
-    {
-        return target != null;
-    }
     #endregion Conditions/Transitions
 
     #region Vision
@@ -309,6 +321,7 @@ public class AIController : Controller
         // If they are making 0 noise, they also can't be heard
         if (noiseMaker.volumeDistance <= 0)
         {
+            noiseMaker.volumeDistance = 0;
             return false;
         }
         // If they are making noise, add the volumeDistance in the noisemaker to the hearingDistance of this AI

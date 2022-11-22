@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 1639899897}
   - component: {fileID: 3104473873111521104}
   - component: {fileID: -3344840079080592560}
+  - component: {fileID: 992305701981355518}
   m_Layer: 0
   m_Name: PlayerTank
   m_TagString: Untagged
@@ -251,6 +252,7 @@ MonoBehaviour:
   moveSpeed: 5
   turnSpeed: 0.5
   maxHealth: 2
+  _currentHealth: 0
   shellPrefab: {fileID: 8274715871533174252, guid: 45c2896bd3f69804b9eb69c9d464af7d, type: 3}
   fireForce: 900
   damageDone: 3
@@ -336,4 +338,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1631c816e1127fa4989ba7ad25592658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 20
+--- !u!114 &992305701981355518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7181453275338633961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef73964a5d1fa154785b1b1bef7aab15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

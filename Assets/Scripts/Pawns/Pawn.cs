@@ -22,7 +22,7 @@ public abstract class Pawn : MonoBehaviour
     /// <summary>
     /// This pawn's current health
     /// </summary>
-    protected float _currentHealth;
+    public float _currentHealth;
 
     protected NoiseMaker noiseMaker;
     /// <summary>

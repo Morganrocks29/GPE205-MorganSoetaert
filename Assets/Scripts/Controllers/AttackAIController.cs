@@ -16,9 +16,14 @@ public class AttackAIController : AIController
     // Update is called once per frame
     public override void Update()
     {
-        MakeDecisions();
+        if (pawn != null)
+        {
+            MakeDecisions();
 
-        base.Update();
+            base.Update();
+
+            CanHear(target);
+        }
     }
     #endregion MonoBehaviour
 
@@ -30,6 +35,11 @@ public class AttackAIController : AIController
                 // Do the actions of the patrol state
                 Patrol();
                 // Check for transitions 
+                if (target == null)
+                {
+                    // Set the target to player one
+                    TargetPlayerOne();
+                }
                 if (IsDistanceLessThan(target, followDistance))
                 {
                     ChangeState(AIState.Attack);
@@ -39,6 +49,11 @@ public class AttackAIController : AIController
                 // Do the actions of the attack state
                 DoAttackState();
                 // Check for transitions
+                if (target == null)
+                {
+                    // Set the target to player one
+                    TargetPlayerOne();
+                }
                 if (!IsDistanceLessThan(target, followDistance))
                 {
                     ChangeState(AIState.Patrol);

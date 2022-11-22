@@ -16,9 +16,14 @@ public class CowardAIController : AIController
     // Update is called once per frame
     public override void Update()
     {
-        MakeDecisions();
+        if (pawn != null)
+        {
+            MakeDecisions();
 
-        base.Update();
+            base.Update();
+
+            CanHear(target);
+        }
     }
     #endregion MonoBehaviour
 
@@ -30,6 +35,11 @@ public class CowardAIController : AIController
                 // Do the actions of the patrol state
                 Patrol();
                 // Check for transitions 
+                if (target == null)
+                {
+                    // Set the target to player one
+                    TargetPlayerOne();
+                }
                 if (IsDistanceLessThan(target, followDistance))
                 {
                     ChangeState(AIState.Flee);
@@ -39,6 +49,11 @@ public class CowardAIController : AIController
                 // Do the actions of the flee state
                 Flee();
                 // Check for transitions
+                if (target == null)
+                {
+                    // Set the target to player one
+                    TargetPlayerOne();
+                }
                 if (!IsDistanceLessThan(target, followDistance))
                 {
                     ChangeState(AIState.Patrol);
