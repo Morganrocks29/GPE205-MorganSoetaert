@@ -251,11 +251,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   turnSpeed: 0.5
-  maxHealth: 2
+  maxHealth: 100
   _currentHealth: 0
   shellPrefab: {fileID: 8274715871533174252, guid: 45c2896bd3f69804b9eb69c9d464af7d, type: 3}
   fireForce: 900
-  damageDone: 3
+  damageDone: 20
   shellLifespan: 1
 --- !u!54 &8999623371678957346
 Rigidbody:

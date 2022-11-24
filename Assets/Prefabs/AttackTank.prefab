@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7138705357802347532}
   - component: {fileID: 7138705357802347520}
   - component: {fileID: 5189422450022640041}
-  - component: {fileID: 8926063434396545162}
+  - component: {fileID: 2736189972927450659}
   m_Layer: 0
   m_Name: AttackTank
   m_TagString: Untagged
@@ -106,6 +106,7 @@ MonoBehaviour:
   moveSpeed: 3
   turnSpeed: 80
   maxHealth: 2
+  _currentHealth: 0
   shellPrefab: {fileID: 8274715871533174252, guid: 45c2896bd3f69804b9eb69c9d464af7d, type: 3}
   fireForce: 9
   damageDone: 1
@@ -177,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firepointTransform: {fileID: 852357755473383112}
---- !u!114 &8926063434396545162
+--- !u!114 &2736189972927450659
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,25 +187,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 51900278938373136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b63bca406a16e4f40afeb48016dda4a1, type: 3}
+  m_Script: {fileID: 11500000, guid: ef73964a5d1fa154785b1b1bef7aab15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawn: {fileID: 7138705357802347521}
-  lastStateChangeTime: 0
-  currentState: 0
-  target: {fileID: 0}
-  followDistance: 15
-  fleeDistance: 9
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  waypointStopDistance: 5
-  currentWaypoint: 0
-  fieldOfView: 5
-  maxViewDistance: 15
-  volumeDistance: 5
-  hearingDistance: 5
 --- !u!1 &7006725987908464467
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5086177338763723212}
   - component: {fileID: 5086177338763723200}
   - component: {fileID: 7890576880738415721}
-  - component: {fileID: 4190813712379670413}
+  - component: {fileID: -5281388523391297967}
   m_Layer: 0
   m_Name: CowardTank
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2683053440787435984}
-  m_LocalRotation: {x: 0.04434697, y: -0.83848584, z: 0.06902448, w: 0.53871185}
+  m_LocalRotation: {x: 0.04629066, y: 0.15519989, z: -0.0072806193, w: 0.9867711}
   m_LocalPosition: {x: 0.011409923, y: 2.74, z: 3.2711089}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -106,6 +106,7 @@ MonoBehaviour:
   moveSpeed: 3
   turnSpeed: 80
   maxHealth: 2
+  _currentHealth: 0
   shellPrefab: {fileID: 8274715871533174252, guid: 45c2896bd3f69804b9eb69c9d464af7d, type: 3}
   fireForce: 900
   damageDone: 1
@@ -177,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firepointTransform: {fileID: 3337258824381862664}
---- !u!114 &4190813712379670413
+--- !u!114 &-5281388523391297967
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,25 +187,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2683053440787435984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4877e83319fd07148a1259b2d1ea2548, type: 3}
+  m_Script: {fileID: 11500000, guid: ef73964a5d1fa154785b1b1bef7aab15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawn: {fileID: 5086177338763723201}
-  lastStateChangeTime: 0
-  currentState: 1
-  target: {fileID: 0}
-  followDistance: 15
-  fleeDistance: 9
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  waypointStopDistance: 5
-  currentWaypoint: 0
-  fieldOfView: 5
-  maxViewDistance: 15
-  volumeDistance: 5
-  hearingDistance: 5
 --- !u!1 &4951876897678291603
 GameObject:
   m_ObjectHideFlags: 0

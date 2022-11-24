@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6557656762471124948}
   - component: {fileID: 6557656762471124952}
   - component: {fileID: 8076137887859636849}
-  - component: {fileID: 3292923925965064443}
+  - component: {fileID: 8008018335746391355}
   m_Layer: 0
   m_Name: GuardTank
   m_TagString: Untagged
@@ -106,6 +106,7 @@ MonoBehaviour:
   moveSpeed: 3
   turnSpeed: 80
   maxHealth: 2
+  _currentHealth: 0
   shellPrefab: {fileID: 8274715871533174252, guid: 45c2896bd3f69804b9eb69c9d464af7d, type: 3}
   fireForce: 900
   damageDone: 1
@@ -177,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firepointTransform: {fileID: 3730267449513303312}
---- !u!114 &3292923925965064443
+--- !u!114 &8008018335746391355
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,22 +187,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4082758943857090504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bda04e66ca9c18b4da2b44ef6c9e02d0, type: 3}
+  m_Script: {fileID: 11500000, guid: ef73964a5d1fa154785b1b1bef7aab15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawn: {fileID: 6557656762471124953}
-  lastStateChangeTime: 0
-  currentState: 1
-  target: {fileID: 0}
-  followDistance: 15
-  fleeDistance: 9
-  waypoints: []
-  waypointStopDistance: 0
-  currentWaypoint: 0
-  fieldOfView: 5
-  maxViewDistance: 15
-  volumeDistance: 5
-  hearingDistance: 5
 --- !u!1 &6425608136235891851
 GameObject:
   m_ObjectHideFlags: 0
