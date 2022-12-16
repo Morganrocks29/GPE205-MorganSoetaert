@@ -74,6 +74,9 @@ public class MapGenerator : MonoBehaviour
                 //Save it to the grid array
                 grid[currentCol, currentRow] = tempRoom;
 
+                // Spawn
+                //GameManager Playe
+
                 //Open the doors
                 //If we are on the bottom row, open the north door
                 if (currentRow == 0)
@@ -88,6 +91,19 @@ public class MapGenerator : MonoBehaviour
                 {
                     tempRoom.doorNorth.SetActive(false);
                     tempRoom.doorSouth.SetActive(false);
+                }
+                if (currentCol == 0)
+                {
+                    tempRoom.doorEast.SetActive(false);
+                }
+                else if (currentCol == cols - 1)
+                {
+                    tempRoom.doorWest.SetActive(false);
+                }
+                else
+                {
+                    tempRoom.doorEast.SetActive(false);
+                    tempRoom.doorWest.SetActive(false);
                 }
             }
         }

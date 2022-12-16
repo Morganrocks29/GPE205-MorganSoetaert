@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TankPawn : Pawn
 {
@@ -67,7 +68,7 @@ public class TankPawn : Pawn
     // When an object calls this function, the object will be destroyed
     public override void Die()
     {
+        GameManager.instance.ActivateGameoverScreen();
         Destroy(this.gameObject);
     }
-
 }

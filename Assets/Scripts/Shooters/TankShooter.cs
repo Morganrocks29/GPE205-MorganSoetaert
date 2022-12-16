@@ -5,6 +5,7 @@ using UnityEngine;
 public class TankShooter : Shooter
 {
     public Transform firepointTransform;
+    public AudioClip shootClip;
 
     // Start is called before the first frame update
     public override void Start()
@@ -36,5 +37,6 @@ public class TankShooter : Shooter
         }
 
         Destroy(newShell, lifeSpan);
+        AudioSource.PlayClipAtPoint(shootClip, firepointTransform.transform.position);
     }
 }
