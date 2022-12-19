@@ -72,13 +72,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnPlayer();
-        SpawnPlayer2();
         SpawnAICoward();
         SpawnAIAttack();
         SpawnAIGuard();
         SpawnAIChase();
         ActivateTitleScreen();
+        SpawnPlayer();
+        SpawnPlayer2();
     }
 
     // Update is called once per frame

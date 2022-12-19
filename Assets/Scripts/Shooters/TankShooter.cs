@@ -36,7 +36,9 @@ public class TankShooter : Shooter
             rb.AddForce(firepointTransform.forward * fireForce);
         }
 
+      
         Destroy(newShell, lifeSpan);
         AudioSource.PlayClipAtPoint(shootClip, firepointTransform.transform.position);
+
     }
 }

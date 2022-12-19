@@ -53,6 +53,8 @@ public class TankPawn : Pawn
         // The current health will equal the current health at that time minus the damage
         _currentHealth -= damage;
 
+
+
         // If the current health is equal to or less than 0, destroy this object
         if (_currentHealth <= 0)
         {

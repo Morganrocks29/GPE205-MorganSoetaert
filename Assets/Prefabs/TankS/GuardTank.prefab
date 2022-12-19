@@ -217,7 +217,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4082758943857090504}
   m_LocalRotation: {x: 0, y: -0.9131546, z: 0, w: 0.4076135}
-  m_LocalPosition: {x: 0.011409923, y: 2.74, z: 3.2711089}
+  m_LocalPosition: {x: 0.011409923, y: 2.74, z: 3.1988318}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3730267449513303312}
@@ -293,7 +293,7 @@ MonoBehaviour:
   maxHealth: 50
   _currentHealth: 0
   shellPrefab: {fileID: 8274715871533174252, guid: 45c2896bd3f69804b9eb69c9d464af7d, type: 3}
-  fireForce: 900
+  fireForce: 500
   damageDone: 1
   shellLifespan: 1
 --- !u!114 &4072138832688696038
